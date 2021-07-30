@@ -1,12 +1,12 @@
 //  Copyright 2016-2019 Skyscanner Ltd
 //
-//  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance 
+//  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
 //  with the License. You may obtain a copy of the License at
 //
 //  http://www.apache.org/licenses/LICENSE-2.0
 //
-//  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed 
-//  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License 
+//  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
+//  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
 //  for the specific language governing permissions and limitations under the License.
 
 import UIKit
@@ -17,7 +17,7 @@ import UIKit
 @IBDesignable
 open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this type_body_length
     /**
-     A Boolean value that determines if the language displayed is LTR. 
+     A Boolean value that determines if the language displayed is LTR.
      Default value set automatically from the application language settings.
      */
     @objc open var isLTRLanguage: Bool = UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
@@ -200,7 +200,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     // MARK: Properties
 
     /**
-    The formatter used before displaying content in the title label. 
+    The formatter used before displaying content in the title label.
     This can be the `title`, `selectedTitle` or the `errorMessage`.
     The default implementation converts the text to uppercase.
     */
@@ -631,15 +631,17 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /**
-     Calculate the bounds for the bottom line of the control. 
+     Calculate the bounds for the bottom line of the control.
      Override to create a custom size bottom line in the textbox.
      - parameter bounds: The current bounds of the line
      - parameter editing: True if the control is selected or highlighted
      - returns: The rectangle that the line bar should render in
      */
+    open var offsetLine: CGFloat = 0
+    
     open func lineViewRectForBounds(_ bounds: CGRect, editing: Bool) -> CGRect {
         let height = editing ? selectedLineHeight : lineHeight
-        return CGRect(x: 0, y: bounds.size.height - height, width: bounds.size.width, height: height)
+        return CGRect(x: 0, y: (bounds.size.height + self.offsetLine) - height, width: bounds.size.width, height: height)
     }
 
     /**
@@ -700,18 +702,19 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     // MARK: - Helpers
-
+    open var useTitleFormatter = true
+    
     fileprivate func titleOrPlaceholder() -> String? {
         guard let title = title ?? placeholder else {
             return nil
         }
-        return titleFormatter(title)
+        return self.useTitleFormatter ? titleFormatter(title) : title
     }
 
     fileprivate func selectedTitleOrTitlePlaceholder() -> String? {
         guard let title = selectedTitle ?? title ?? placeholder else {
             return nil
         }
-        return titleFormatter(title)
+        return self.useTitleFormatter ? titleFormatter(title) : title
     }
 } // swiftlint:disable:this file_length

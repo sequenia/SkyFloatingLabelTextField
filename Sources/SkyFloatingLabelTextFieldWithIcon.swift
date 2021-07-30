@@ -12,7 +12,7 @@
 import UIKit
 
 /**
- Identify the type of icon. 
+ Identify the type of icon.
     - font: Set your icon by setting the font of iconLabel
     - image: Set your icon by setting the image of iconImageView
  */
@@ -118,7 +118,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
     }
 
     /**
-     A float value that determines the left margin of the icon. 
+     A float value that determines the left margin of the icon.
      Use this value to position the icon more precisely horizontally.
      */
     @IBInspectable
@@ -129,7 +129,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
     }
 
     /**
-     A float value that determines the bottom margin of the icon. 
+     A float value that determines the bottom margin of the icon.
      Use this value to position the icon more precisely vertically.
      */
     @IBInspectable
@@ -300,7 +300,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
     }
 
     /**
-     Calculates the bounds for the placeholder component of the control. 
+     Calculates the bounds for the placeholder component of the control.
      Override to create a custom size textbox in the control.
      - parameter bounds: The current bounds of the placeholder component
      - returns: The rectangle that the placeholder component should render in
